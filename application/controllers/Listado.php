@@ -130,14 +130,10 @@ class Listado extends CI_Controller {
 									$value->job,
 									$value->phone,
 									$value->status,
-									($value->attendance == 1) ? "SI" : "NO" ));
+									$value->attendance));
 		}
 
 		$writer->close();
-
-		header('Content-Type: application/xlsx');
-		header('Content-Disposition: attachment; filename=Invitados.xlsx');
-		header('Pragma: no-cache');
 	}
 
     function utf8_encode_deep(&$array) {

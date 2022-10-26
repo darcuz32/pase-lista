@@ -18,7 +18,7 @@ class Listado_model extends CI_Model {
     }
 
     public function getGuests(){
-        $this->db->select("*");
+        $this->db->select("*, CASE WHEN attendance = 1 THEN 'SI' ELSE 'NO' END AS attendance");
         $query = $this->db->get("guests");
         return $query->result();
     }
