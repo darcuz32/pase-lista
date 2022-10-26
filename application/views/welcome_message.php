@@ -66,9 +66,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 												<button class="au-btn au-btn-icon au-btn--green au-btn--small" id="addGuest">
 													<i class="zmdi zmdi-plus"></i>agregar invitado
 												</button>
-												<button class="au-btn au-btn-icon au-btn--blue au-btn--small">
+												<a class="au-btn au-btn-icon au-btn--blue au-btn--small" target="_blank" href="<?php echo base_url(); ?>listado/export">
 													<i class="zmdi zmdi-download"></i>EXPORTAR
-												</button>
+												</a>
 											</div>
 										</div>
 										<div class="table-responsive table-responsive-data2">

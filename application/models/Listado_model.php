@@ -1,4 +1,5 @@
 <?php  if ( ! defined('BASEPATH')) exit('No direct script access allowed');
+
 class Listado_model extends CI_Model {
     
     public function __construct() {
@@ -14,6 +15,12 @@ class Listado_model extends CI_Model {
         $this->db->where('id', $id);
         $query = $this->db->get("guests");
         return $query->row();
+    }
+
+    public function getGuests(){
+        $this->db->select("*");
+        $query = $this->db->get("guests");
+        return $query->result();
     }
 
     public function update($id, $data){

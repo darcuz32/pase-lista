@@ -1,5 +1,15 @@
 <?php
 defined('BASEPATH') OR exit('No direct script access allowed');
+require_once APPPATH."/third_party/Spout/Autoloader/autoload.php";
+
+
+
+use Box\Spout\Reader\ReaderFactory;
+use Box\Spout\Common\Type;
+use Box\Spout\Writer\WriterFactory;
+use Box\Spout\Common\Entity\Row;
+use Box\Spout\Writer\Style\StyleBuilder;
+use Box\Spout\Writer\Style\Color;
 
 class Listado extends CI_Controller {
     public function __construct() {
@@ -97,6 +107,38 @@ class Listado extends CI_Controller {
         $guest = $this->listado_model->getGuest($_POST['id']);
         echo json_encode($guest);
     }
+
+    function export(){
+		set_time_limit(0);
+		ini_set('display_errors', 1);
+		ini_set('display_startup_errors', 1);
+		error_reporting(E_ALL);
+		ini_set('memory_limit', '-1');
+		$data = $this->listado_model->getGuests();
+
+		$writer = WriterFactory::create(Type::XLSX);
+		$writer->openToBrowser('Invitados.xlsx');
+		$writer->addRow(array('NOMBRE',
+								'CARGO',
+								'TELÉFONO',
+								'STATUS',
+								'ASISTENCIA'));
+
+
+		foreach ($data as $key => $value) {
+			$writer->addRow(array($value->name,
+									$value->job,
+									$value->phone,
+									$value->status,
+									($value->attendance == 1) ? "SI" : "NO" ));
+		}
+
+		$writer->close();
+
+		header('Content-Type: application/xlsx');
+		header('Content-Disposition: attachment; filename=Invitados.xlsx');
+		header('Pragma: no-cache');
+	}
 
     function utf8_encode_deep(&$array) {
 		array_walk_recursive($array, function(&$item, $key){
