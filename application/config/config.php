@@ -24,7 +24,6 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 |
 */
 $config['base_url'] = 'http://lespcoah.ddns.net/pase-lista/';
-
 /*
 |--------------------------------------------------------------------------
 | Index File
