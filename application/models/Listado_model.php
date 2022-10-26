@@ -21,6 +21,12 @@ class Listado_model extends CI_Model {
         $this->db->update('guests',$data);
     }
 
+    public function updateAttendance($id, $data){
+        $this->db->set('attendance_date','NOW()',FALSE);
+        $this->db->where('id', $id);
+        $this->db->update('guests',$data);
+    }
+
     public function delete($id){
         $this->db->where('id', $id);
         $this->db->delete('guests');

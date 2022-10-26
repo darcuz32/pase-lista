@@ -247,6 +247,18 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 					}
 					
 				});
+
+				$(document).delegate('.check-attendance', 'click', function(){
+					if(confirm('¿Está seguro de '+(($(this).is(":checked")) ? "marcar" : "desmarcar")+' la asistencia?')){
+						$.post('<?php echo base_url(); ?>listado/attendance', {id: $(this).data("id"), val: $(this).is(":checked")}, function(data) {
+							datatable.ajax.reload();
+							alert('Datos guardados correctamente');
+						});
+					}else{
+						$(this).prop( "checked", !$(this).is(":checked") );
+					}
+					
+				});
 			});
 		</script>
 

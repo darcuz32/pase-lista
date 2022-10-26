@@ -37,7 +37,7 @@ class Listado extends CI_Controller {
             array( 'db' => 'id',     'dt' => 0,
                 'formatter' => function($d,$row){ 
                     $html = '<label class="au-checkbox">
-                                <input type="checkbox">
+                                <input type="checkbox" class="check-attendance" data-id="'.$d.'" '.(($row['attendance'] == 1) ? 'checked' : '').'>
                                 <span class="au-checkmark"></span>
                             </label>';
                     return $html;
@@ -81,6 +81,10 @@ class Listado extends CI_Controller {
         }else{
             $this->listado_model->save($data);
         }
+    }
+
+    function attendance(){
+        $this->listado_model->updateAttendance($_POST['id'], array("attendance" => (($_POST['val'] == "true") ? 1 : 0)));
     }
 
     function delete(){
